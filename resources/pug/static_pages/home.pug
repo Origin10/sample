@@ -1,0 +1,16 @@
+//output:../../views/static_pages/home.blade.php
+
+@extends('layouts.default')
+@section('title', '主頁')
+@section('content')
+.jumbotron
+  h1 Hello laravel
+  p.lead
+    你現在看到的是
+    a(herf="#") Laravel 入門教程
+    的項目演示頁面
+  p
+    一切，從這裡開始。
+  p
+    a.btn.btn-lg.btn-success(href="{{ route('signup') }}" role="button") 現在註冊
+@stop

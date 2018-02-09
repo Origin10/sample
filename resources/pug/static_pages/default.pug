@@ -1,0 +1,13 @@
+//output:../../views/layouts/default.blade.php
+doctype html
+html
+  head
+    title @yield('title', 'Sample') -laravel 入門教程
+    link(rel="stylesheet" href='/css/app.css')
+  body
+    @include("layouts._header")
+    
+    .container
+      .col-md-offset-1.col-md-10
+      @yield('content')
+      @include('layouts._footer')

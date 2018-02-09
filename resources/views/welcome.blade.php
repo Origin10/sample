@@ -1,10 +1,9 @@
-//output:../views/welcome.blade.php
-doctype html
-html
-  head
-    title Sample
-    link(href='https://fonts.googleapis.com/css?family=Lato:100', rel='stylesheet', type='text/css')
-    style.
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sample</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+    <style>
       html, body {
       height: 100%;
       }
@@ -28,7 +27,13 @@ html
       .title {
       font-size: 66px;
       }
-  body
-    .container
-      .content
-        .title Hello Sample!
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="content">
+        <div class="title">Hello Sample!</div>
+      </div>
+    </div>
+  </body>
+</html>
