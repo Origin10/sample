@@ -2,6 +2,12 @@
 <html>
   <head>
     <title>@yield('title', 'Sample') -laravel 入門教程</title>
+    <link rel="stylesheet" href="/css/app.css">
   </head>
-  <body>@yield('content')</body>
+  <body>@include("layouts._header")
+    <div class="container">
+      <div class="col-md-offset-1 col-md-10"></div>@yield('content')
+      @include('layouts._footer')
+    </div>
+  </body>
 </html>
