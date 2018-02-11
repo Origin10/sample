@@ -1,0 +1,9 @@
+//output:../../views/shared/_messages.blade.php
+
+@foreach(['danger','warning','success','info'] as $msg)
+@if(session()->has($msg))
+.flash-_message
+  p.alert(class="alert-{{$msg}}")
+    {{ session()->get($msg)}}
+@endif
+@endforeach
