@@ -21,7 +21,7 @@
           <label for="password">密碼：</label>
           <input type="password" name="password" value="{{old('password')}}" class="form-control"/>
         </div>
-        <div class="form-group">x
+        <div class="form-group">
           <label for="password_confirmation">確認密碼：</label>
           <input type="password" name="password_confirmation" value="{{old('password_confirmation')}}" class="form-control"/>
         </div>
