@@ -1,0 +1,27 @@
+//output:../../views/sessions/create.blade.php
+@extends('layouts.default')
+@section('title', '登入')
+@section('content')
+.col-md-offset-2.col-md-8
+  .panel.panel-default
+    .panel-heading
+      h5 登入
+    .panel-body
+      @include('shared._errors')
+      form(method='POST' action="{{ route('login') }}")
+        {{ csrf_field() }}
+        .form-group
+          label(for='email') 電子郵件：
+          input.form-control(type='text' name='email' value="{{ old('email') }}")
+        .form-group
+          label(for='password') 密碼：
+          input.form-control(type='password' name='password' value="{{ old('password') }}")
+        .checkbox
+          lable
+            input(type="checkbox" name="remember") 
+            |記住我
+        button.btn.btn-primary(type='submit') 登入
+      hr
+      p 還沒有帳號？
+        a(href="{{ route('signup') }}") 現在註冊！
+@stop
