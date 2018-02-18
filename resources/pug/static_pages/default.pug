@@ -7,8 +7,11 @@ html
   body
     @include("layouts._header")
     
-    .container
+    #main.container
       .col-md-offset-1.col-md-10
         @include('shared._messages')
         @yield('content')
         @include('layouts._footer')
+        
+    script(src='/js/app.js')
+      

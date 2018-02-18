@@ -1,0 +1,10 @@
+//output:../../views/users/_user.blade.php
+li
+  img.gravatar(src!='{{ $user->gravatar() }}', alt!='{{ $user->name }}')
+  a.username(href!="{{ route('users.show', $user->id )}}") {{ $user->name }}
+  @can('destroy', $user)
+  form(action!="{{ route('users.destroy', $user->id) }}", method='post')
+    {{ csrf_field() }}
+    {{ method_field('DELETE') }}
+    button.btn.btn-sm.btn-danger.delete-btn(type='submit') 刪除
+    @endcan

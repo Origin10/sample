@@ -8,6 +8,12 @@ use Auth;
 
 class SessionsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('guest', [
+        'only' => ['create']
+      ]);
+    }
     public function create()
     {
         return view('sessions.create');
@@ -16,13 +22,13 @@ class SessionsController extends Controller
     public function store(Request $request)
     {
         $credentials = $this->validate($request, [
-        'email'=>'required|email|max:255',
-        'password'=>'required'
-      ]);
+            'email'=>'required|email|max:255',
+            'password'=>'required',
+        ]);
         if (Auth::attempt($credentials, $request->has('remember'))) {
             $name=Auth::user()->name;
             session()->flash('success', '歡迎，使用者'.$name.'回來');
-            return redirect()->route('users.show', [Auth::user()]);
+            return redirect()->intended(route('users.show', [Auth::user()]));
         } else {
             session()->flash('danger', '很抱歉，您的電子郵件或密碼錯誤');
             return redirect()->back();
@@ -31,8 +37,8 @@ class SessionsController extends Controller
 
     public function destroy()
     {
-      Auth::logout();
-      session()->flash('success','您已成功登出！');
-      return redirect('login');
+        Auth::logout();
+        session()->flash('success', '您已成功登出！');
+        return redirect('login');
     }
 }

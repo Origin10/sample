@@ -1,0 +1,12 @@
+//output:../../views/users/index.blade.php
+@extends('layouts.default')
+@section('title', '所有用戶')
+@section('content')
+.col-md-offset-2.col-md-8
+  h1 所有用户
+  ul.users
+  @foreach ($users as $user)
+  @include('users._user')
+  @endforeach
+  {!! $users->render() !!}
+@stop

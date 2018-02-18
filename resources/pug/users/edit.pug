@@ -1,0 +1,33 @@
+//output:../../views/users/edit.blade.php
+@extends('layouts.default')
+@section('title','註冊')
+
+@section('content')
+.col-md-offset-2.col-md-8
+  .panel.panel-default
+    .panel-heading
+      h5 更新個人資料
+    .panel-body
+      @include('shared._errors')
+      
+      .gravatar_edit
+        a(href="http://gravatar.com/emails" target="_blank")
+          img.gravatar(src!="{{$user->gravatar('200')}}" alt!="{{$user->name}}")
+            
+      form(method="POST" action!="{{route('users.update',$user->id)}}")
+        {{method_field('PATCH')}}
+        {{ csrf_field() }}
+        .form-group
+          label(for="name") 名稱：
+          input.form-control(type="text" name="name" value!="{{$user->name}}")
+        .form-group
+          label(for="email") 郵箱：
+          input.form-control(type="text" name="email" value!="{{$user->email}}" disabled)
+        .form-group
+          label(for="password") 密碼：
+          input.form-control(type="password" name="password" value="{{old('password')}}")
+        .form-group
+          label(for="password_confirmation") 確認密碼：
+          input.form-control(type="password" name="password_confirmation" value="{{old('password_confirmation')}}")
+        button.btn.btn-primary(type="submit") 更新
+@stop

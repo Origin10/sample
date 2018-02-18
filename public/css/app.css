@@ -8354,6 +8354,10 @@ body {
   padding-top: 60px;
 }
 
+body #main {
+  margin-top: 50px;
+}
+
 section {
   overflow: auto;
 }
@@ -8510,5 +8514,37 @@ input {
 
 .panel {
   margin-top: 50px;
+}
+
+/* Users edit */
+
+.gravatar_edit {
+  margin: 15px auto;
+  text-align: center;
+}
+
+.gravatar_edit .gravatar {
+  float: none;
+  max-width: 100px;
+}
+
+/* Users index */
+
+.users {
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+.users li {
+  overflow: auto;
+  padding: 10px 0;
+  border-bottom: 1px solid #gray-lighter;
+}
+
+.delete-btn {
+  float: right;
+  position: relative;
+  right: 0;
 }
 
