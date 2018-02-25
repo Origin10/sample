@@ -1,0 +1,46 @@
+//output:../../../views/auth/passwords/reset.blade.php
+
+@extends('layouts.default')
+@section('title', '更新密碼')
+@section('content')
+.container
+  .row
+    .col-md-8.col-md-offset-2
+      .panel.panel-default
+        .panel-heading 更新密碼
+        .panel-body
+          @if (session('status'))
+          .alert.alert-success
+            {{ session('status') }}
+          @endif
+          form.form-horizontal(method='POST', action="{{ route('password.request') }}")
+            {{ csrf_field() }}
+            input(type='hidden', name='token', value='{{ $token }}')
+            div(class!="form-group{{ $errors->has('email') ? ' has-error' : '' }}")
+              label.col-md-4.control-label(for='email') 郵箱地址：
+              .col-md-6
+                input#email.form-control(type='email', name='email', value="{{ $email or old('email') }}", required='', autofocus='')
+                @if ($errors->has('email'))
+                span.help-block
+                  strong {{ $errors->first('email') }}
+                @endif
+            div(class!="form-group{{ $errors->has('password') ? ' has-error' : '' }}")
+              label.col-md-4.control-label(for='password') 密碼：
+              .col-md-6
+                input#password.form-control(type='password', name='password', required='')
+                @if ($errors->has('password'))
+                span.help-block
+                  strong {{ $errors->first('password') }}
+                @endif
+            div(class!="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}")
+              label.col-md-4.control-label(for='password-confirm') 確認密碼：
+              .col-md-6
+                input#password-confirm.form-control(type='password', name='password_confirmation', required='')
+                @if ($errors->has('password_confirmation'))
+                span.help-block
+                  strong {{ $errors->first('password_confirmation') }}
+                @endif
+            .form-group
+              .col-md-6.col-md-offset-4
+                button.btn.btn-primary(type='submit') 修改密碼
+@endsection

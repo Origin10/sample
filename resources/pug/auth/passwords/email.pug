@@ -1,0 +1,29 @@
+//output:../../../views/auth/passwords/email.blade.php
+
+@extends('layouts.default')
+@section('title', '重置密码')
+@section('content')
+.container
+  .row
+    .col-md-8.col-md-offset-1
+      .panel.panel-default
+        .panel-heading 重設密碼
+        .panel-body
+          @if (session('status'))
+          .alert.alert-success
+            {{ session('status') }}
+          @endif
+          form.form-horizontal(method='POST', action="{{ route('password.email') }}")
+            {{ csrf_field() }}
+            div(class!="form-group{{ $errors->has('email') ? ' has-error' : '' }}")
+              label.col-md-4.control-label(for='email') 信箱地址：
+              .col-md-6
+                input#email.form-control(type='email', name='email', value="{{ old('email') }}", required='')
+                @if ($errors->has('email'))
+                span.help-block
+                  strong {{ $errors->first('email') }}
+                @endif
+            .form-group
+              .col-md-6.col-md-offset-4
+                button.btn.btn-primary(type='submit') 發送密碼重設郵件
+@endsection

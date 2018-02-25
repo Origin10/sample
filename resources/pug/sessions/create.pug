@@ -14,7 +14,9 @@
           label(for='email') 電子郵件：
           input.form-control(type='text' name='email' value="{{ old('email') }}")
         .form-group
-          label(for='password') 密碼：
+          label(for='password') 密码（
+            a(href="{{ route('password.request') }}") 忘记密码
+            span ）：
           input.form-control(type='password' name='password' value="{{ old('password') }}")
         .checkbox
           lable
