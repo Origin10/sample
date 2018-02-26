@@ -1,0 +1,10 @@
+//output:../../views/shared/_feed.blade.php
+
+@if (count($feed_items))
+ol.statuses
+  @foreach ($feed_items as $status)
+  @include('statuses._status', ['user' => $status->user])
+  @endforeach
+  {!! $feed_items->render() !!}
+@endif
+ 

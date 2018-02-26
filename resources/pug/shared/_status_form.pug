@@ -1,0 +1,7 @@
+//output:../../views/shared/_status_form.blade.php
+
+form(action="{{ route('statuses.store') }}", method='POST')
+  @include('shared._errors')
+  {{ csrf_field() }}
+  textarea.form-control(rows='3', placeholder='聊聊新鮮事...', name='content') {{ old('content') }}
+  button.btn.btn-primary.pull-right(type='submit') 發布

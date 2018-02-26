@@ -1,0 +1,16 @@
+//output:../../views/statuses/_status.blade.php
+
+li(id!='status-{{ $status->id }}' style="position: relative")
+  a(href!="{{ route('users.show', $user->id )}}")
+    img.gravatar(src!='{{ $user->gravatar() }}', alt!='{{ $user->name }}')
+  span.user
+    a(href!="{{ route('users.show', $user->id )}}") {{ $user->name }} &nbsp
+  span.timestamp {{ $status->created_at->diffForHumans() }}
+  span.content {{ $status->content }}
+  @can('destroy', $status)
+  form(action!="{{ route('statuses.destroy', $status->id) }}", method='POST')
+  {{ csrf_field() }}
+  {{ method_field('DELETE') }}
+  button.btn.btn-sm.btn-danger.status-delete-btn(type='submit'
+    style="position: absolute; right: 0; top: 10px") 刪除
+  @endcan

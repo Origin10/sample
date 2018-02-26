@@ -33,7 +33,10 @@ class UsersController extends Controller
 
     public function show(User $user)
     {
-        return view('users.show', compact('user'));
+        $statuses = $user->statuses()
+                          ->orderBy('created_at', 'desc')
+                          ->paginate(30);
+        return view('users.show', compact('user', 'statuses'));
     }
 
     public function store(Request $request)
@@ -99,21 +102,21 @@ class UsersController extends Controller
         $to = $user->email;
         $subject = "感謝註冊 Sample 應用！請確認信相連結。";
 
-        Mail::send($view, $data, function ($message) use ($from, $name, $to, $subject){
-          $message->from($from, $name)->to($to)->subject($subject);
+        Mail::send($view, $data, function ($message) use ($from, $name, $to, $subject) {
+            $message->from($from, $name)->to($to)->subject($subject);
         });
     }
 
     public function confirmEmail($token)
     {
-      $user = User::where('activation_token', $token)->firstOrFail();
+        $user = User::where('activation_token', $token)->firstOrFail();
 
-      $user->activated = true;
-      $user->activation_token = null;
-      $user->save();
+        $user->activated = true;
+        $user->activation_token = null;
+        $user->save();
 
-      Auth::login($user);
-      session()->flash('success','恭喜你，激活成功！');
-      return redirect()->route('users.show',[$user]);
+        Auth::login($user);
+        session()->flash('success', '恭喜你，激活成功！');
+        return redirect()->route('users.show', [$user]);
     }
 }
