@@ -1,0 +1,13 @@
+//output:../../views/users/show_follow.blade.php
+
+@section('content')
+.col-md-offset-2.col-md-8
+  h1 {{ $title }}
+  ul.users
+    @foreach ($users as $user)
+    li
+      img.gravatar(src!='{{ $user->gravatar() }}', alt!='{{ $user->name }}')
+      a.username(href!="{{ route('users.show', $user->id )}}") {{ $user->name }}
+    @endforeach
+    {!! $users->render() !!}
+@stop

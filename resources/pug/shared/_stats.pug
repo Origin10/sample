@@ -1,0 +1,12 @@
+//output:../../views/shared/_stats.blade.php
+
+.stats
+  a(href!="{{ route('users.followings', $user->id) }}")
+    strong#following.stat {{ count($user->followings) }}
+    | 關注
+  a(href!="{{ route('users.followers', $user->id) }}")
+    strong#followers.stat {{ count($user->followers) }}
+    | 粉絲
+  a(href!="{{ route('users.show', $user->id) }}")
+    strong#statuses.stat {{ $user->statuses()->count() }}
+    | 微博

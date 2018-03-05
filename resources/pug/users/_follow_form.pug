@@ -1,0 +1,15 @@
+//output:../../views/users/_follow_form.blade.php
+
+@if ($user->id !== Auth::user()->id)
+#follow_form
+  @if (Auth::user()->isFollowing($user->id))
+  form(action!="{{ route('followers.destroy', $user->id) }}", method='post')
+    {{ csrf_field() }}
+    {{ method_field('DELETE') }}
+    button.btn.btn-sm(type='submit') 取消關注
+    @else
+    form(action!="{{ route('followers.store', $user->id) }}", method='post')
+      {{ csrf_field() }}
+      button.btn.btn-sm.btn-primary(type='submit') 關注
+  @endif
+@endif
