@@ -1,13 +1,21 @@
-//output:../../views/users/show_follow.blade.php
-
+@extends('layouts.default')
+@section('title', $title)
 @section('content')
 .col-md-offset-2.col-md-8
   h1 {{ $title }}
   ul.users
     @foreach ($users as $user)
+    hr
     li
       img.gravatar(src!='{{ $user->gravatar() }}', alt!='{{ $user->name }}')
       a.username(href!="{{ route('users.show', $user->id )}}") {{ $user->name }}
-    @endforeach
+      @if($title == '你關注的人')
+      form(action="{{ route('followers.destroy', $user->id) }}", method='post', style='float:right')
+        {{ csrf_field() }}
+        {{ method_field('DELETE') }}
+        button.btn.btn-sm.btn-warning(type='submit') 取消關注
+      @endif
+      br
+      @endforeach
     {!! $users->render() !!}
 @stop

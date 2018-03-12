@@ -1,16 +1,49 @@
 //output:../../views/statuses/_status.blade.php
 
-li(id!='status-{{ $status->id }}' style="position: relative")
+li(id!='status-{{ $status->id }}' )
   a(href!="{{ route('users.show', $user->id )}}")
     img.gravatar(src!='{{ $user->gravatar() }}', alt!='{{ $user->name }}')
   span.user
     a(href!="{{ route('users.show', $user->id )}}") {{ $user->name }} &nbsp
   span.timestamp {{ $status->created_at->diffForHumans() }}
   span.content {{ $status->content }}
+  //- div(style="float:right; position: relative")
+  
   @can('destroy', $status)
   form(action!="{{ route('statuses.destroy', $status->id) }}", method='POST')
-  {{ csrf_field() }}
-  {{ method_field('DELETE') }}
-  button.btn.btn-sm.btn-danger.status-delete-btn(type='submit'
-    style="position: absolute; right: 0; top: 10px") 刪除
+    {{ csrf_field() }}
+    {{ method_field('DELETE') }}
+    button.btn.btn-sm.btn-danger.status-delete-btn 刪除
+    //- (type='submit' style="position: absolute; top: -20px")
   @endcan
+  
+  //- (type='button' style="position; bo: -60px")
+    
+  #shareBtn.btn.btn-sm.btn-info.clearfix 分享FB
+  script.
+    document.getElementById('shareBtn').onclick = function() {
+    FB.ui({
+    method: 'share',
+    display: 'popup',
+    href: location.href,
+    }, function(response){});
+    }
+    
+    
+    
+  script.
+    window.fbAsyncInit = function() {
+    FB.init({
+    appId            : '217578548801139',
+    autoLogAppEvents : true,
+    xfbml            : true,
+    version          : 'v2.12'
+    });
+    };
+    (function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
