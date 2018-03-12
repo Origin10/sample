@@ -2,8 +2,13 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Gate as GateContract;
+use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+
+use App\Models\User;
+use App\Models\Status;
+use App\Policies\UserPolicy;
+use App\Policies\StatusPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -14,13 +19,14 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         'App\Model' => 'App\Policies\ModelPolicy',
-        \App\Models\User::class  => \App\Policies\UserPolicy::class,
-        \App\Models\Status::class  => \App\Policies\StatusPolicy::class,
+        User::class  => UserPolicy::class,
+        Status::class  => StatusPolicy::class,
     ];
 
     /**
-     * Register any authentication / authorization services.
+     * Register any application authentication / authorization services.
      *
+     * @param  \Illuminate\Contracts\Auth\Access\Gate  $gate
      * @return void
      */
     public function boot(GateContract $gate)
