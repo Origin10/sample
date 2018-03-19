@@ -7,33 +7,4 @@
     <button class="btn btn-sm btn-danger status-delete-btn">刪除</button>
   </form>@endcan
   <div id="shareBtn" class="btn btn-sm btn-info clearfix">分享FB</div>
-  <script>
-    document.getElementById('shareBtn').onclick = function() {
-    FB.ui({
-    method: 'share',
-    display: 'popup',
-    href: location.href,
-    }, function(response){});
-    }
-    
-    
-    
-  </script>
-  <script>
-    window.fbAsyncInit = function() {
-    FB.init({
-    appId            : '217578548801139',
-    autoLogAppEvents : true,
-    xfbml            : true,
-    version          : 'v2.12'
-    });
-    };
-    (function(d, s, id){
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) {return;}
-    js = d.createElement(s); js.id = id;
-    js.src = "https://connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-  </script>
 </li>
